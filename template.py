@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO , format = '[%(asctime)s]: %(message)s:')
 
-project_name = "wasteDetection"
+project_name = "objectDetection"
 
 list_of_files = [
     ".github/workflows/.gitkeep",
@@ -25,6 +25,7 @@ list_of_files = [
     f"{project_name}/pipeline/training_pipeline.py",
     f"{project_name}/utils/__init__.py",
     f"{project_name}/utils/main_utils.py",
+    "research/trials.ipynb",
     "templates/index.html",
     "app.py",
     "Dockerfile",
