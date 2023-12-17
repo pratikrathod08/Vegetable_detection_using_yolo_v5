@@ -2,17 +2,20 @@ import sys , os
 from objectDetection.logger import logging 
 from objectDetection.exception import AppException
 from objectDetection.components.data_ingestion import DataIngestion
+from objectDetection.components.data_validation import DataValidation
+from objectDetection.components.model_trainer import ModelTrainer
 
-from objectDetection.entity.config_entity import (DataIngestionConfig, DataValidationConfig)
-from objectDetection.entity.artifacts_entity import (DataIngestionArtifact,DataValidationArtifact)
-
-from objectDetection.components.data_validation import (DataValidation)
+from objectDetection.entity.config_entity import (DataIngestionConfig, DataValidationConfig, ModelTrainerConfig)
+from objectDetection.entity.artifacts_entity import (DataIngestionArtifact,DataValidationArtifact, ModelTrainerArtifact)
 
 
 class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
         self.data_validation_config = DataValidationConfig()
+        self.model_trainer_config = ModelTrainerConfig()
+
+
 
     def start_data_ingestion(self) -> DataIngestionArtifact:
         try:
@@ -51,12 +54,27 @@ class TrainPipeline:
         except Exception as e:
             raise AppException(e, sys)
 
-        
+
+    def start_model_trainer(self) -> ModelTrainerArtifact:
+        try:
+            model_trainer = ModelTrainer(model_trainer_config=self.model_trainer_config)
+            model_trainer_artifacts = model_trainer.initiate_model_trainer()
+            return model_trainer_artifacts
+
+        except Exception as e:
+            raise AppException(e , sys)   
 
     def run_pipeline(self) -> None:
         try:
             data_ingestion_artifact = self.start_data_ingestion()
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact = data_ingestion_artifact)
+
+            if data_validation_artifact.validation_status == True:
+                model_trainer_artifacts = self.start_model_trainer()
+
+            else:
+                raise Exception("Your data is not in correct format")
+
 
         except Exception as e :
             raise AppException(e , sys)

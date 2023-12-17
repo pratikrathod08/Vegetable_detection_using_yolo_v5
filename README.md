@@ -8,7 +8,7 @@
 4. pipelines
 5. app.py
 
-## process 
+## Data Ingestion process 
 
 1. logging
 - create logging file for log purpose .
@@ -28,4 +28,18 @@
 7. pipeline/training_pipeline
 - create method start data ingestion make object of data ingestion class which do overall process and return data ingestion artifacts.  
 - make run method to run training pipelines start data ingestion method.
+
+## Data Validation workflow
+
+1. content/training_pipeline/init
+- give dir name and required all files.
+2. entity/config_entity 
+- add data validation config
+3. entity/artifacts_entity
+- add data validation artifact class.
+4. components/data_validation
+- methods for data validation 
+5. pipeline/training_pipeline
+- add start data validation method
+- add method to run pipeline.
 
