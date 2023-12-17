@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['nimbus', 'onion', 'poteto']
+
+roboflow:
+  workspace: pratik1
+  project: vegetables-detection-wmpu4
+  version: 1
+  license: MIT
+  url: https://universe.roboflow.com/pratik1/vegetables-detection-wmpu4/dataset/1
