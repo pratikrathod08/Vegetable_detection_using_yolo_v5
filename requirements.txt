@@ -10,6 +10,7 @@ flask
 # Usage: pip install -r requirements.txt
 
 # Base ------------------------------------------------------------------------
+from_root  ## for get root path
 gitpython>=3.1.30
 matplotlib>=3.3
 numpy>=1.18.5
