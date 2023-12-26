@@ -6,7 +6,7 @@
 - flask
 - opencv
 - pytorch
-- 
+  
 ## Workflows
 
 1. constants
